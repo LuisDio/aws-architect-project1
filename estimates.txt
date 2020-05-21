@@ -1,0 +1,13 @@
+Recovery Time Objective (RTO)
+An RTO of one hour for this incident would be reasonable.
+if the RTO is 1 hour and disaster occurs at 12:00 p.m (noon), 
+then the DR process should restore the systems to an acceptable 
+service level within an hour i.e. by 1:00 p.m
+
+A reasonable RPO would require:
+Create an RDS MySQL database with automatic backups enabled
+Once the database is available, it is fully functional and can be used for any relational workload.
+You can connect to the database and insert a sample set of data.
+Restore the database to a prior point in time.
+if a disaster occurs at 12:00 p.m (noon) and the RPO is one hour, 
+the system should recover all data that was in the system before 11:00 a.m.

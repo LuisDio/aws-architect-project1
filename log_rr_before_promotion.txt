@@ -1,0 +1,38 @@
+
+mysql -u admin -h database-1-replicas.cpfurhoxlkwb.us-west-2.rds.amazonaws.com -p
+
+SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| innodb             |
+| mysql              |
+| performance_schema |
+| sys                |
+| udacity            |
++--------------------+
+
+mysql> USE udacity;
+Database changed
+
+
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_udacity |
++-------------------+
+| Persons           |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO Persons values ("Marya", 34, "Oregon");
+ERROR 1290 (HY000): The MySQL server is running with the --read-only option so it cannot execute this statement
+
+
+mysql> SELECT * FROM Person;
++------+------+----------+
+| Name | Age  | location |
++------+------+----------+
+| John |   45 | Virginia |
++------+------+----------+
+1 row in set (0.01 sec)
