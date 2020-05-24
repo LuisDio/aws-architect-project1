@@ -1,13 +1,23 @@
-Recovery Time Objective (RTO)
-An RTO of one hour for this incident would be reasonable.
-if the RTO is 1 hour and disaster occurs at 12:00 p.m (noon), 
-then the DR process should restore the systems to an acceptable 
-service level within an hour i.e. by 1:00 p.m
+Recover Time Objective (RTO) is the maximum time your platform or service can be unavailable.
+=============================================================================================
+- Minimum RTO for a single AZ outage: 
+  considering our RDS is running on subnet group of two subnet which is on different az, it would
+  take about 6 minutes since this will require starting up a new RDS on the other AZ then applying 
+  all changes since the last backup.
 
-A reasonable RPO would require:
-Create an RDS MySQL database with automatic backups enabled
-Once the database is available, it is fully functional and can be used for any relational workload.
-You can connect to the database and insert a sample set of data.
-Restore the database to a prior point in time.
-if a disaster occurs at 12:00 p.m (noon) and the RPO is one hour, 
-the system should recover all data that was in the system before 11:00 a.m.
+- Minimum RTO for a single region outage: 
+  considering our RDS has a standby replicas in an other region,
+  It would take about 8 minutes With cross-region read replica, which
+  we can promote the replica with minimum downtime.
+
+
+The Recovery Point Objective (RPO) is the maximum amount of time that your system can lose data.
+================================================================================================
+- Minimum RPO for a single AZ outage:
+  considering our RDS is still running on subnet group with each subnet residing in different AZ,
+  It would be about 12 minutes for data to be lost from the AZ outage up to the time of failover.
+
+- Minimum RPO for a single region outage: 
+  considering our RDS has a standby replicas in an other region,
+  It would take about 16 minutes. RPO here would be the time it takes for the database replica in 
+  the standby region to be promoted and operative. 
